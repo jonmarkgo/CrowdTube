@@ -1,3 +1,4 @@
+<?php error_reporting(E_ALL); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +49,7 @@ $client = new Services_Twilio($AccountSid, $AuthToken);
 /* Your Twilio Number or Outgoing Caller ID */
 $from= '4248356688';
 // make an associative array of server admins
-
+if (strlen($r['number']) == 12)
 $client->account->sms_messages->create($from, $r['number'], 'Your video about "'.$r['request'].'" is playing live in Times Square! - @JonMarkGo + Twilio');
 
 mysql_query("UPDATE queue set played=1 WHERE played=2");
@@ -86,7 +87,7 @@ $videoEntry = $yt->getVideoEntry($r['vimeo_id']);
 ?>
 <object width="425" height="350">
   <param name="movie" value="<?php echo $cont->url; ?>"></param>
-  <embed src="<?php echo $cont->url; ?>" 
+  <embed src="<?php echo $cont->url; ?>&autoplay=1&rel=0" 
     type="<?php echo $cont->type; ?>" width="425" height="350">
   </embed>
 </object>

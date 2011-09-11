@@ -26,6 +26,16 @@ $searchTerms = $_POST['Body'];
 
 mysql_query("INSERT into queue VALUES (NULL,'".$_POST['From']."','".$_POST['Body']."',NULL,0,'".$vidid."','".$_POST['FromState']."')");
 $id = mysql_insert_id();
+$playlistToAddTo = $yt->getPlaylistListEntry('PL655D5AA631EBF3B7'); //CrowdTube
+$postUrl = $playlistToAddTo->getPlaylistVideoFeedUrl();
+// video entry to be added
+$videoEntryToAdd = $vid;
+
+// create a new Zend_Gdata_PlaylistListEntry, passing in the underling DOMElement of the VideoEntry
+$newPlaylistListEntry = $yt->newPlaylistListEntry($videoEntryToAdd->getDOM());
+
+  $yt->insertEntry($newPlaylistListEntry, $postUrl);
+
 $msg = "Hi you are in line #".$id;
 }
 ?>
