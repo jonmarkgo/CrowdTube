@@ -58,7 +58,6 @@ mysql_query("UPDATE queue set played=2 WHERE id=".$r['id']);
 
 
 
-
         
         <div id="content-wrapper" class="span-25">
             <div id="content" class="span-17">
@@ -70,27 +69,38 @@ mysql_query("UPDATE queue set played=2 WHERE id=".$r['id']);
                 </div>
                 
                 <div id="video-wrapper" style="width:560px;float:left;">
-                    <?php
-                    require_once 'Zend/Loader.php'; // the Zend dir must be in your include_path
+           <iframe width="640" height="390" src="http://www.youtube.com/p/655D5AA631EBF3B7?version=3&amp;hl=en_US" frameborder="0" allowfullscreen></iframe>
+           <?php
+           require_once 'Zend/Loader.php'; // the Zend dir must be in your include_path
 Zend_Loader::loadClass('Zend_Gdata_YouTube');
-$yt = new Zend_Gdata_YouTube();
+Zend_Loader::loadClass('Zend_Gdata_ClientLogin'); 
+$authenticationURL= 'https://www.google.com/accounts/ClientLogin';
+$httpClient = 
+  Zend_Gdata_ClientLogin::getHttpClient(
+              $username = 'jonmarkgo@gmail.com',
+              $password = 'zccintwkfsvimeus ',
+              $service = 'youtube',
+              $client = null,
+              $source = 'CrowdTube', // a short string identifying your application
+              $loginToken = null,
+              $loginCaptcha = null,
+              $authenticationURL);
+$developerKey = 'AI39si7mhC6ixzlFGDp6udcIVj1mUGiOMh_BhYOLkGcVPDQshJR9KzSttKm9soC7ooO9FHlKGppgJlxcaPlB0rxucAODJvT00Q';
+$applicationId = 'CrowdTube v1';
+$clientId = 'VHD CrowdTube - v1';
 
-$videoEntry = $yt->getVideoEntry($r['vimeo_id']);
- foreach ($videoEntry->mediaGroup->content as $content) {
-    if ($content->type === "application/x-shockwave-flash") {
-      $cont = $content;
-      break;
-    }
-  }
+$yt = new Zend_Gdata_YouTube($httpClient, $applicationId, $clientId, $developerKey);
+$searchTerms = $_POST['Body'];
+  $yt->setMajorProtocolVersion(2);
 
+  $playlistListFeed = $yt->getPlaylistListFeed('jonmarkgo');
+$playlistListEntry = $playlistListFeed[0]; //CrowdTube
+$playlistVideoFeed =
+    $yt->getPlaylistVideoFeed($playlistListEntry->getPlaylistVideoFeedUrl());
+    $x = 0;
+    $playlistVideoFeed[0]->delete();
 
-?>
-<object width="425" height="350">
-  <param name="movie" value="<?php echo $cont->url; ?>"></param>
-  <embed src="<?php echo $cont->url; ?>&autoplay=1&rel=0" 
-    type="<?php echo $cont->type; ?>" width="425" height="350">
-  </embed>
-</object>
+           ?>
                     <h2 class="location center">This video sent by a visitor from <?php echo $r['state']; ?></h2>
                 </div>
             </div>
