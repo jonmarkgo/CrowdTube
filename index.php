@@ -21,7 +21,6 @@
    $.ajaxSetup({ cache: false });
 });
 </script>
-<script src="froogaloop2.min.js"></script>
 
 </head>
 
@@ -70,50 +69,24 @@ mysql_query("UPDATE queue set played=2 WHERE id=".$r['id']);
                 </div>
                 
                 <div id="video-wrapper" style="width:560px;float:left;">
-                    
-<iframe id="player" src="http://player.vimeo.com/video/<?php echo $r['vimeo_id']; ?>?api=1&player_id=player&autoplay=true&width=640" width="400" height="225" frameborder="0"></iframe> 
-<script type="text/javascript">
+                    <?php
+                    require_once 'Zend/Loader.php'; // the Zend dir must be in your include_path
+Zend_Loader::loadClass('Zend_Gdata_YouTube');
+$yt = new Zend_Gdata_YouTube();
 
-            (function(){
+$videoEntry = $yt->getVideoEntry($r['vimeo_id']);
+ foreach ($videoEntry->mediaGroup->content as $content) {
+print_r($content);
+  }
 
-                // Listen for the ready event for any vimeo video players on the page
-                var vimeoPlayers = document.querySelectorAll('iframe'),
-                    player;
-
-                for (var i = 0, length = vimeoPlayers.length; i < length; i++) {
-                    player = vimeoPlayers[i];
-                    $f(player).addEvent('ready', ready);
-                }
-
-                /**
-* Utility function for adding an event. Handles the inconsistencies
-* between the W3C method for adding events (addEventListener) and
-* IE's (attachEvent).
-*/
-                function addEvent(element, eventName, callback) {
-                    if (element.addEventListener) {
-                        element.addEventListener(eventName, callback, false);
-                    }
-                    else {
-                        element.attachEvent(eventName, callback, false);
-                    }
-                }
-
-                /**
-* Called once a vimeo player is loaded and ready to receive
-* commands. You can add events and make api calls only after this
-* function has been called.
-*/
-                function ready(player_id) {
-                    // Keep a reference to Froogaloop for this player
-                    var container = document.getElementById(player_id).parentNode.parentNode,
-                        froogaloop = $f(player_id);
- froogaloop.addEvent('finish', function(data) {
-                                   window.location.reload();
-                                });
-}
-})();
-</script>
+?>
+<!--<object width="425" height="350">
+  <param name="movie" value="MEDIA_CONTENT_URL"></param>
+  <embed src="MEDIA_CONTENT_URL" 
+    type="MEDIA_CONTENT_TYPE" width="425" height="350">
+  </embed>
+</object>
+-->
                     <h2 class="location center">This video sent by a visitor from <?php echo $r['state']; ?></h2>
                 </div>
             </div>
