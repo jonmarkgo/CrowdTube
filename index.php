@@ -35,7 +35,7 @@
 $link = mysql_connect('localhost', 'jongottc_jontv', 'ZV.28q%fGFAV');
 mysql_select_db('jongottc_jontv');
 
-$q = mysql_query("SELECT * from queue WHERE played = 0 order by id ASC LIMIT 6");
+$q = mysql_query("SELECT * from queue WHERE played = 0 order by id ASC LIMIT 1");
 if (mysql_num_rows($q) == 0) die();
 $r = mysql_fetch_assoc($q);
 // Include the PHP TwilioRest library

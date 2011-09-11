@@ -11,7 +11,7 @@ else {
 	require_once 'Zend/Loader.php'; // the Zend dir must be in your include_path
 Zend_Loader::loadClass('Zend_Gdata_YouTube');
 $yt = new Zend_Gdata_YouTube();
-$searchTerms = 'lolcat'; //$_POST['Body'];
+$searchTerms = $_POST['Body'];
   $yt->setMajorProtocolVersion(2);
   $query = $yt->newVideoQuery();
   $query->setOrderBy('viewCount');
@@ -21,10 +21,10 @@ $searchTerms = 'lolcat'; //$_POST['Body'];
   // Note that we need to pass the version number to the query URL function
   // to ensure backward compatibility with version 1 of the API.
   $videoFeed = $yt->getVideoFeed($query->getQueryUrl(2));
-  $vid = $videoEntry[0];
+  $vid = $videoFeed[0];
   $vidid = $vid->getVideoId();
 
-mysql_query("INSERT into queue VALUES (NULL,'".$_POST['From']."','".$_POST['Body']."',NULL,0,".$vidid.",'".$_POST['FromState']."')");
+mysql_query("INSERT into queue VALUES (NULL,'".$_POST['From']."','".$_POST['Body']."',NULL,0,'".$vidid."','".$_POST['FromState']."')");
 $id = mysql_insert_id();
 $msg = "Hi you are in line #".$id;
 }
