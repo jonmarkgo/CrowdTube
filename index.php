@@ -75,13 +75,19 @@ Zend_Loader::loadClass('Zend_Gdata_YouTube');
 $yt = new Zend_Gdata_YouTube();
 
 $videoEntry = $yt->getVideoEntry($r['vimeo_id']);
- $content = $videoEntry->mediaGroup->content[0];
+ foreach ($videoEntry->mediaGroup->content as $content) {
+    if ($content->type === "application/x-shockwave-flash") {
+      $cont = $content;
+      break;
+    }
+  }
+
 
 ?>
 <object width="425" height="350">
-  <param name="movie" value="<?php echo $content->url; ?>"></param>
-  <embed src="<?php echo $content->url; ?>" 
-    type="<?php echo $content->type; ?>" width="425" height="350">
+  <param name="movie" value="<?php echo $cont->url; ?>"></param>
+  <embed src="<?php echo $cont->url; ?>" 
+    type="<?php echo $cont->type; ?>" width="425" height="350">
   </embed>
 </object>
                     <h2 class="location center">This video sent by a visitor from <?php echo $r['state']; ?></h2>
