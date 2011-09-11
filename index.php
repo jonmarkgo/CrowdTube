@@ -75,18 +75,15 @@ Zend_Loader::loadClass('Zend_Gdata_YouTube');
 $yt = new Zend_Gdata_YouTube();
 
 $videoEntry = $yt->getVideoEntry($r['vimeo_id']);
- foreach ($videoEntry->mediaGroup->content as $content) {
-print_r($content);
-  }
+ $content = $videoEntry->mediaGroup->content[0];
 
 ?>
-<!--<object width="425" height="350">
-  <param name="movie" value="MEDIA_CONTENT_URL"></param>
-  <embed src="MEDIA_CONTENT_URL" 
-    type="MEDIA_CONTENT_TYPE" width="425" height="350">
+<object width="425" height="350">
+  <param name="movie" value="<?php echo $content->url; ?>"></param>
+  <embed src="<?php echo $content->url; ?>" 
+    type="<?php echo $content->type; ?>" width="425" height="350">
   </embed>
 </object>
--->
                     <h2 class="location center">This video sent by a visitor from <?php echo $r['state']; ?></h2>
                 </div>
             </div>
