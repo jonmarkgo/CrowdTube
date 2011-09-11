@@ -1,10 +1,9 @@
-<?php error_reporting(E_ALL); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <title>Hackday Mashup</title>
+    <title>CrowdTube</title>
     <link rel="stylesheet" href="css/screen.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -30,7 +29,7 @@
     <div class="container">
         
         <div id="header" class="span-25">
-            <h1 class="center">HackDay Mashup</h1>
+            <h1 class="center">CrowdTube</h1>
         </div>        
         <?php
 $link = mysql_connect('localhost', 'jongottc_jontv', 'ZV.28q%fGFAV');
@@ -69,7 +68,12 @@ mysql_query("UPDATE queue set played=2 WHERE id=".$r['id']);
                 </div>
                 
                 <div id="video-wrapper" style="width:560px;float:left;">
-           <iframe width="640" height="390" src="http://www.youtube.com/p/655D5AA631EBF3B7?version=3&amp;hl=en_US" frameborder="0" allowfullscreen></iframe>
+                <object style="height: 390px; width: 640px">
+<param name="movie" value="http://www.youtube.com/p/655D5AA631EBF3B7?version=3&autohide=1&autoplay=1&enablejsapi=1&iv_load_policy=3&feature=player_embedded">
+<param name="allowFullScreen" value="true">
+<param name="allowScriptAccess" value="always">
+<embed src="http://www.youtube.com/p/655D5AA631EBF3B7?version=3&autohide=1&autoplay=1&enablejsapi=1&iv_load_policy=3&feature=player_embedded" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="640" height="415"></object>
+
            <?php
            require_once 'Zend/Loader.php'; // the Zend dir must be in your include_path
 Zend_Loader::loadClass('Zend_Gdata_YouTube');
@@ -90,7 +94,7 @@ $applicationId = 'CrowdTube v1';
 $clientId = 'VHD CrowdTube - v1';
 
 $yt = new Zend_Gdata_YouTube($httpClient, $applicationId, $clientId, $developerKey);
-$searchTerms = $_POST['Body'];
+
   $yt->setMajorProtocolVersion(2);
 
   $playlistListFeed = $yt->getPlaylistListFeed('jonmarkgo');
