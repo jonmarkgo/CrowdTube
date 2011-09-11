@@ -25,8 +25,12 @@ $searchTerms = $_POST['Body'];
 $playlistListEntry = $playlistListFeed[0]; //CrowdTube
 $playlistVideoFeed =
     $yt->getPlaylistVideoFeed($playlistListEntry->getPlaylistVideoFeedUrl());
+    $x = 0;
     foreach ($playlistVideoFeed as $entry) {
-
+if ($x == 0) {
+	continue;
+	$x = 1;
+}
 $videoEntry = $yt->getVideoEntry($entry->getVideoId());
   $videoThumbnails = $videoEntry->getVideoThumbnails();
 

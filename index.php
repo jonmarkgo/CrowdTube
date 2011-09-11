@@ -31,33 +31,7 @@
         <div id="header" class="span-25">
             <h1 class="center">CrowdTube</h1>
         </div>        
-        <?php
-$link = mysql_connect('localhost', 'jongottc_jontv', 'ZV.28q%fGFAV');
-mysql_select_db('jongottc_jontv');
 
-$q = mysql_query("SELECT * from queue WHERE played = 0 order by id ASC LIMIT 1");
-if (mysql_num_rows($q) == 0) die();
-$r = mysql_fetch_assoc($q);
-// Include the PHP TwilioRest library
-require "Services/Twilio.php";
-// Set our AccountSid and AuthToken
-$AccountSid = "ACf7bb6d402454c1c63335af07f8ec2b89";
-$AuthToken = "0da076e5996d2ad7322cfda964345846";
-// Instantiate a new Twilio Rest Client
-$client = new Services_Twilio($AccountSid, $AuthToken);
-/* Your Twilio Number or Outgoing Caller ID */
-$from= '4248356688';
-// make an associative array of server admins
-if (strlen($r['number']) == 12)
-$client->account->sms_messages->create($from, $r['number'], 'Your video about "'.$r['request'].'" is playing live in Times Square! - @JonMarkGo + Twilio');
-
-mysql_query("UPDATE queue set played=1 WHERE played=2");
-mysql_query("UPDATE queue set played=2 WHERE id=".$r['id']);
-?>
-
-
-
-        
         <div id="content-wrapper" class="span-25">
             <div id="content" class="span-17">
                 <h2 class="message">TXT 4248356688 to request a video or CALL in to vote on the current one!</h3>
@@ -68,43 +42,41 @@ mysql_query("UPDATE queue set played=2 WHERE id=".$r['id']);
                 </div>
                 
                 <div id="video-wrapper" style="width:560px;float:left;">
-                <object style="height: 390px; width: 640px">
-<param name="movie" value="http://www.youtube.com/p/655D5AA631EBF3B7?version=3&autohide=1&autoplay=1&enablejsapi=1&iv_load_policy=3&feature=player_embedded">
-<param name="allowFullScreen" value="true">
-<param name="allowScriptAccess" value="always">
-<embed src="http://www.youtube.com/p/655D5AA631EBF3B7?version=3&autohide=1&autoplay=1&enablejsapi=1&iv_load_policy=3&feature=player_embedded" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="640" height="415"></object>
+                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script> 
 
-           <?php
-           require_once 'Zend/Loader.php'; // the Zend dir must be in your include_path
-Zend_Loader::loadClass('Zend_Gdata_YouTube');
-Zend_Loader::loadClass('Zend_Gdata_ClientLogin'); 
-$authenticationURL= 'https://www.google.com/accounts/ClientLogin';
-$httpClient = 
-  Zend_Gdata_ClientLogin::getHttpClient(
-              $username = 'jonmarkgo@gmail.com',
-              $password = 'zccintwkfsvimeus ',
-              $service = 'youtube',
-              $client = null,
-              $source = 'CrowdTube', // a short string identifying your application
-              $loginToken = null,
-              $loginCaptcha = null,
-              $authenticationURL);
-$developerKey = 'AI39si7mhC6ixzlFGDp6udcIVj1mUGiOMh_BhYOLkGcVPDQshJR9KzSttKm9soC7ooO9FHlKGppgJlxcaPlB0rxucAODJvT00Q';
-$applicationId = 'CrowdTube v1';
-$clientId = 'VHD CrowdTube - v1';
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script> 
+ 
+<script type="text/javascript">
 
-$yt = new Zend_Gdata_YouTube($httpClient, $applicationId, $clientId, $developerKey);
+var ytplayer;
+function onytplayerStateChange(newState) {
 
-  $yt->setMajorProtocolVersion(2);
+alert(newState);
+} 
+function onYouTubePlayerReady(playerId) {
+    ytplayer = document.getElementById(playerId);
+  
+    ytplayer.addEventListener('onStateChange', 'onytplayerStateChange');
+}
 
-  $playlistListFeed = $yt->getPlaylistListFeed('jonmarkgo');
-$playlistListEntry = $playlistListFeed[0]; //CrowdTube
-$playlistVideoFeed =
-    $yt->getPlaylistVideoFeed($playlistListEntry->getPlaylistVideoFeedUrl());
-    $x = 0;
-    $playlistVideoFeed[0]->delete();
+$(document).ready( function(){
 
-           ?>
+var params = {
+    allowScriptAccess: "always"
+};
+ 
+var atts = {
+    id: "ytplayer1"
+};
+ 
+swfobject.embedSWF("http://www.youtube.com/p/655D5AA631EBF3B7?version=3&playerapiid=ytplayer1&autohide=1&autoplay=1&enablejsapi=1&iv_load_policy=3", "video-wrapper", "853", "505", "9", null, {}, params, atts);
+
+});
+
+</script>
+
+              
+         
                     <h2 class="location center">This video sent by a visitor from <?php echo $r['state']; ?></h2>
                 </div>
             </div>
