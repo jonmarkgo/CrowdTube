@@ -50,8 +50,9 @@
 
 var ytplayer;
 function onytplayerStateChange(newState) {
-
-alert(newState);
+if (newState == 2 || newState == 0) {
+   $.ajax('update-pl.php');
+}
 } 
 function onYouTubePlayerReady(playerId) {
     ytplayer = document.getElementById(playerId);
@@ -69,7 +70,7 @@ var atts = {
     id: "ytplayer1"
 };
  
-swfobject.embedSWF("http://www.youtube.com/p/655D5AA631EBF3B7?version=3&playerapiid=ytplayer1&autohide=1&autoplay=1&enablejsapi=1&iv_load_policy=3", "video-wrapper", "853", "505", "9", null, {}, params, atts);
+swfobject.embedSWF("http://www.youtube.com/p/655D5AA631EBF3B7?version=3&playerapiid=ytplayer1&autohide=1&autoplay=1&enablejsapi=1&iv_load_policy=3", "video-wrapper", "640", "415", "9", null, {}, params, atts);
 
 });
 

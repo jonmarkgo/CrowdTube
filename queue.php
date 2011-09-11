@@ -28,8 +28,9 @@ $playlistVideoFeed =
     $x = 0;
     foreach ($playlistVideoFeed as $entry) {
 if ($x == 0) {
-	continue;
+	
 	$x = 1;
+	continue;
 }
 $videoEntry = $yt->getVideoEntry($entry->getVideoId());
   $videoThumbnails = $videoEntry->getVideoThumbnails();
