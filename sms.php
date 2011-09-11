@@ -26,7 +26,9 @@ $searchTerms = $_POST['Body'];
 
 mysql_query("INSERT into queue VALUES (NULL,'".$_POST['From']."','".$_POST['Body']."',NULL,0,'".$vidid."','".$_POST['FromState']."')");
 $id = mysql_insert_id();
-$playlistToAddTo = $yt->getPlaylistListEntry('PL655D5AA631EBF3B7'); //CrowdTube
+
+  $playlistListFeed = $yt->getPlaylistListFeed('jonmarkgo');
+$playlistToAddTo = $playlistListFeed[0]; //CrowdTube
 $postUrl = $playlistToAddTo->getPlaylistVideoFeedUrl();
 // video entry to be added
 $videoEntryToAdd = $vid;
