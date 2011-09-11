@@ -8,13 +8,23 @@ if (mysql_num_rows($q) > 0) {
 $msg = "Sorry, you already submitted a video request. Let someone else have a go!";
 }
 else {
-require'vimeo-php-lib/vimeo.php';
+	require_once 'Zend/Loader.php'; // the Zend dir must be in your include_path
+Zend_Loader::loadClass('Zend_Gdata_YouTube');
+$yt = new Zend_Gdata_YouTube();
+$searchTerms = 'lolcat'; //$_POST['Body'];
+  $yt->setMajorProtocolVersion(2);
+  $query = $yt->newVideoQuery();
+  $query->setOrderBy('viewCount');
+  $query->setSafeSearch('none');
+  $query->setVideoQuery($searchTerms);
 
-$vimeo = new phpVimeo('7116fd6db1913b488868af9b0ddabe2f','47f7b1ad6cc19d56');
-$videos = $vimeo->call('vimeo.videos.search', array('query' => 'cat','sort'=>'most_liked','per_page'=>10));
-$vid = array_rand($videos->videos->video);
-$vid = $videos->videos->video[$vid];
-mysql_query("INSERT into queue VALUES (NULL,'".$_POST['From']."','".$_POST['Body']."',NULL,0,".$vid->id.",'".$_POST['FromState']."')");
+  // Note that we need to pass the version number to the query URL function
+  // to ensure backward compatibility with version 1 of the API.
+  $videoFeed = $yt->getVideoFeed($query->getQueryUrl(2));
+  $vid = $videoEntry[0];
+  $vidid = $vid->getVideoId();
+
+mysql_query("INSERT into queue VALUES (NULL,'".$_POST['From']."','".$_POST['Body']."',NULL,0,".$vidid.",'".$_POST['FromState']."')");
 $id = mysql_insert_id();
 $msg = "Hi you are in line #".$id;
 }
