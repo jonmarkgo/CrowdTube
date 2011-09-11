@@ -34,7 +34,7 @@ $playlistVideoFeed =
     $x = 0;
     $vidid = $playlistVideoFeed[0]->getVideoId();
     $que = "SELECT * from queue WHERE vimeo_id='".$vidid."'";
-    echo $que;
+    //echo $que;
 $q = mysql_query($que);
 if (mysql_num_rows($q) > 0) {
 $r = mysql_fetch_assoc($q);

@@ -39,7 +39,7 @@ var ytplayer;
 function onytplayerStateChange(newState) {
     console.log(newState);
 if (newState == 2 || newState == 0) {
-    alert('txting');
+   
   $.ajax({
   url: 'update-pl.php'
 });
