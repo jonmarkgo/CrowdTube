@@ -7,20 +7,7 @@
     <link rel="stylesheet" href="css/screen.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script>
- $(document).ready(function() {
-     $("#next-image-container").load("queue.php");
 
-     $("#rating").load("bbvote.php");
-   var refreshId = setInterval(function() {
-
-     $("#next-image-container").load("queue.php");
-
-     $("#rating").load("bbvote.php");
-   }, 2000);
-   $.ajaxSetup({ cache: false });
-});
-</script>
 
 </head>
 
@@ -50,8 +37,12 @@
 
 var ytplayer;
 function onytplayerStateChange(newState) {
+    console.log(newState);
 if (newState == 2 || newState == 0) {
-   $.ajax('update-pl.php');
+    alert('txting');
+  $.ajax({
+  url: 'update-pl.php'
+});
 }
 } 
 function onYouTubePlayerReady(playerId) {
@@ -61,6 +52,16 @@ function onYouTubePlayerReady(playerId) {
 }
 
 $(document).ready( function(){
+ $("#next-image-container").load("queue.php");
+
+ $("#rating").load("bbvote.php");
+   var refreshId = setInterval(function() {
+
+     $("#next-image-container").load("queue.php");
+
+     $("#rating").load("bbvote.php");
+   }, 2000);
+   $.ajaxSetup({ cache: false });
 
 var params = {
     allowScriptAccess: "always"

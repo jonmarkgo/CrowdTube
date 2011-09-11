@@ -54,7 +54,7 @@ $newPlaylistListEntry = $yt->newPlaylistListEntry($videoEntryToAdd->getDOM());
 
   $yt->insertEntry($newPlaylistListEntry, $postUrl);
 
-$msg = "Hi you are in line #".$id;
+$msg = "Thanks, your video is queued up and ready to go!";
 }
 ?>
 <Response>
