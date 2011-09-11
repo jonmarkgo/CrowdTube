@@ -7,13 +7,20 @@ if (mysql_num_rows($q) == 0) {
     echo "YOUR VIDEO";
 }
 else {
-require'vimeo-php-lib/vimeo.php';
-
-$vimeo = new phpVimeo('7116fd6db1913b488868af9b0ddabe2f','47f7b1ad6cc19d56');
+require_once 'Zend/Loader.php'; // the Zend dir must be in your include_path
+Zend_Loader::loadClass('Zend_Gdata_YouTube');
+$yt = new Zend_Gdata_YouTube();
 
     while ($r = mysql_fetch_assoc($q)) {
-    $imgs = $vimeo->call('vimeo.videos.getThumbnailUrls', array('video_id' => $r['vimeo_id']));
-echo'<img class="middle tl tr bl br" src="'.$imgs->thumbnails->thumbnail[1]->_content.'">';
+
+$videoEntry = $yt->getVideoEntry($r['vimeo_id']);
+  $videoThumbnails = $videoEntry->getVideoThumbnails();
+
+$thumb = $videoThumbnails[0];
+
+   
+
+echo'<img class="middle tl tr bl br" src="'.$thumb['url'].'">';
 }
 }
 
