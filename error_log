@@ -1,0 +1,52 @@
+[10-Sep-2011 16:28:27] PHP Fatal error:  Uncaught exception 'Services_Twilio_RestException' with message 'Authenticate' in /home/jongottc/public_html/jontv/Services/Twilio.php:149
+Stack trace:
+#0 /home/jongottc/public_html/jontv/Services/Twilio.php(134): Services_Twilio->_processJsonResponse(401, Array, '{"status":401,"...')
+#1 /home/jongottc/public_html/jontv/Services/Twilio.php(113): Services_Twilio->_processResponse(Array)
+#2 /home/jongottc/public_html/jontv/Services/Twilio/ListResource.php(89): Services_Twilio->createData('Accounts/ACf7bb...', Array)
+#3 /home/jongottc/public_html/jontv/Services/Twilio/CachingDataProxy.php(115): Services_Twilio_ListResource->createData('ACf7bb6d402454c...', Array)
+#4 /home/jongottc/public_html/jontv/Services/Twilio/Resource.php(44): Services_Twilio_CachingDataProxy->createData('SMS/Messages', Array)
+#5 /home/jongottc/public_html/jontv/Services/Twilio/ListResource.php(59): Services_Twilio_Resource->createData('SMS/Messages', Array)
+#6 /home/jongottc/public_html/jontv/Services/Twilio/Rest/SmsMessages.php(22): Servi in /home/jongottc/public_html/jontv/Services/Twilio.php on line 149
+[10-Sep-2011 16:30:43] PHP Fatal error:  Uncaught exception 'Services_Twilio_RestException' with message 'The destination 'To' phone number is required to send an SMS' in /home/jongottc/public_html/jontv/Services/Twilio.php:149
+Stack trace:
+#0 /home/jongottc/public_html/jontv/Services/Twilio.php(134): Services_Twilio->_processJsonResponse(400, Array, '{"status":400,"...')
+#1 /home/jongottc/public_html/jontv/Services/Twilio.php(113): Services_Twilio->_processResponse(Array)
+#2 /home/jongottc/public_html/jontv/Services/Twilio/ListResource.php(89): Services_Twilio->createData('Accounts/ACf7bb...', Array)
+#3 /home/jongottc/public_html/jontv/Services/Twilio/CachingDataProxy.php(115): Services_Twilio_ListResource->createData('ACf7bb6d402454c...', Array)
+#4 /home/jongottc/public_html/jontv/Services/Twilio/Resource.php(44): Services_Twilio_CachingDataProxy->createData('SMS/Messages', Array)
+#5 /home/jongottc/public_html/jontv/Services/Twilio/ListResource.php(59): Services_Twilio_Resource->createData('SMS/Messages', Array)
+#6 /home/jongottc/public_html/jontv in /home/jongottc/public_html/jontv/Services/Twilio.php on line 149
+[10-Sep-2011 16:43:24] PHP Fatal error:  Uncaught exception 'VimeoAPIException' with message 'Invalid signature' in /home/jongottc/public_html/jontv/vimeo-php-lib/vimeo.php:239
+Stack trace:
+#0 /home/jongottc/public_html/jontv/vimeo-php-lib/vimeo.php(275): phpVimeo->_request('vimeo.videos.ge...', Array, 'GET', 'http://vimeo.co...', true)
+#1 /home/jongottc/public_html/jontv/index.php(76): phpVimeo->call('vimeo.videos.ge...', Array)
+#2 {main}
+  thrown in /home/jongottc/public_html/jontv/vimeo-php-lib/vimeo.php on line 239
+[10-Sep-2011 16:47:08] PHP Notice:  Undefined property: stdClass::$content in /home/jongottc/public_html/jontv/index.php on line 77
+[10-Sep-2011 17:40:48] PHP Fatal error:  Uncaught exception 'Services_Twilio_RestException' with message 'Number is not a valid phone number' in /home/jongottc/public_html/jontv/Services/Twilio.php:149
+Stack trace:
+#0 /home/jongottc/public_html/jontv/Services/Twilio.php(134): Services_Twilio->_processJsonResponse(400, Array, '{"status":400,"...')
+#1 /home/jongottc/public_html/jontv/Services/Twilio.php(113): Services_Twilio->_processResponse(Array)
+#2 /home/jongottc/public_html/jontv/Services/Twilio/ListResource.php(89): Services_Twilio->createData('Accounts/ACf7bb...', Array)
+#3 /home/jongottc/public_html/jontv/Services/Twilio/CachingDataProxy.php(115): Services_Twilio_ListResource->createData('ACf7bb6d402454c...', Array)
+#4 /home/jongottc/public_html/jontv/Services/Twilio/Resource.php(44): Services_Twilio_CachingDataProxy->createData('SMS/Messages', Array)
+#5 /home/jongottc/public_html/jontv/Services/Twilio/ListResource.php(59): Services_Twilio_Resource->createData('SMS/Messages', Array)
+#6 /home/jongottc/public_html/jontv/Services/Twilio/Rest/SmsM in /home/jongottc/public_html/jontv/Services/Twilio.php on line 149
+[10-Sep-2011 17:41:10] PHP Fatal error:  Uncaught exception 'Services_Twilio_RestException' with message 'Number is not a valid phone number' in /home/jongottc/public_html/jontv/Services/Twilio.php:149
+Stack trace:
+#0 /home/jongottc/public_html/jontv/Services/Twilio.php(134): Services_Twilio->_processJsonResponse(400, Array, '{"status":400,"...')
+#1 /home/jongottc/public_html/jontv/Services/Twilio.php(113): Services_Twilio->_processResponse(Array)
+#2 /home/jongottc/public_html/jontv/Services/Twilio/ListResource.php(89): Services_Twilio->createData('Accounts/ACf7bb...', Array)
+#3 /home/jongottc/public_html/jontv/Services/Twilio/CachingDataProxy.php(115): Services_Twilio_ListResource->createData('ACf7bb6d402454c...', Array)
+#4 /home/jongottc/public_html/jontv/Services/Twilio/Resource.php(44): Services_Twilio_CachingDataProxy->createData('SMS/Messages', Array)
+#5 /home/jongottc/public_html/jontv/Services/Twilio/ListResource.php(59): Services_Twilio_Resource->createData('SMS/Messages', Array)
+#6 /home/jongottc/public_html/jontv/Services/Twilio/Rest/SmsM in /home/jongottc/public_html/jontv/Services/Twilio.php on line 149
+[10-Sep-2011 17:41:24] PHP Fatal error:  Uncaught exception 'Services_Twilio_RestException' with message 'Number is not a valid phone number' in /home/jongottc/public_html/jontv/Services/Twilio.php:149
+Stack trace:
+#0 /home/jongottc/public_html/jontv/Services/Twilio.php(134): Services_Twilio->_processJsonResponse(400, Array, '{"status":400,"...')
+#1 /home/jongottc/public_html/jontv/Services/Twilio.php(113): Services_Twilio->_processResponse(Array)
+#2 /home/jongottc/public_html/jontv/Services/Twilio/ListResource.php(89): Services_Twilio->createData('Accounts/ACf7bb...', Array)
+#3 /home/jongottc/public_html/jontv/Services/Twilio/CachingDataProxy.php(115): Services_Twilio_ListResource->createData('ACf7bb6d402454c...', Array)
+#4 /home/jongottc/public_html/jontv/Services/Twilio/Resource.php(44): Services_Twilio_CachingDataProxy->createData('SMS/Messages', Array)
+#5 /home/jongottc/public_html/jontv/Services/Twilio/ListResource.php(59): Services_Twilio_Resource->createData('SMS/Messages', Array)
+#6 /home/jongottc/public_html/jontv/Services/Twilio/Rest/SmsM in /home/jongottc/public_html/jontv/Services/Twilio.php on line 149
